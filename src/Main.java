@@ -3,23 +3,60 @@ import java.util.stream.Collector;
 
 public class Main {
     public static void main(String[] args) {
+       // int max=1000;
+       // int min =0;
+       // int x = (int) ((Math.random()*((max-min)+1))+min);
+       // System.out.println(x);
+        int k=0,f=100;
+        int a,b,c;
+        int i=0;
+        do{
+
+            a=k+(int)(Math.random()*f);
+            b=k+(int)(Math.random()*f);
+            c=k+(int)(Math.random()*f);
+        } while(a!=b && b!=c && a!=c);
+        System.out.println(a+" "+b+" "+c);
 
         int results = (int) Math.floor((Math.random() * 100) + 1);
 
-
         List<Integer> list = new ArrayList<>();
-        list.add(403 + 60 + 120);
-        list.add(40 + 80 + 500);
-        list.add(10 + 30 + 54);
-        list.add(400 + 60 + 120);
-        list.add(400 + 60 + 120);
+        list.add(a);
+        list.add(b);
+        list.add(c);
         Object element = null;
-        for (int i = 0; i < list.size(); i++) {
-            element = list.get(i);
+        for (int e = 0; e < list.size(); e++) {
+            element = list.get(e);
         }
-        System.out.println(results);
-        System.out.println(element);
+        int k1 =0, f1 =100;
+        int a1,b1,c1;
+        int t=0;
+        do{
 
+            a1= k1 +(int)(Math.random()* f1);
+            b1= k1 +(int)(Math.random()* f1);
+            c1= k1 +(int)(Math.random()* f1);
+        } while(a1!=b1 && b1!=1 && a1!=c1);
+        System.out.println(a1+" "+b1+" "+c1);
+        List<Integer> list1 = new ArrayList<>();
+        list1.add(a1);
+        list1.add(b1);
+        list1.add(c1);
+
+
+
+
+        Map<String, List<Integer>> listMap = new HashMap<>();
+        listMap.put("Россиия",list);
+        listMap.put("Англия",list1);
+
+        HashMap<String, Integer> listMsp2 = new HashMap<>();
+        listMap.putAll(listMsp2);
+        Integer integerSum = listMap.values().stream().mapToInt(Integer::intValue).sum();
+        System.out.println(integerSum);
+
+        System.out.println(listMap);
+        System.out.println(listMsp2);
 
 
       Map<String, List<Integer>> products = new HashMap<>();
@@ -35,15 +72,14 @@ public class Main {
         products.put("Германия", intList5);
 
         Map<String, Integer> cumulativeMap = new HashMap<String, Integer>();
-        for(Map<String, Integer> productMap: products) {
-            for (Map.Entry<String, Integer> p : productMap.entrySet()) {
-                if (cumulativeMap.containsKey(p.getKey())) {
-                    cumulativeMap.put(p.getKey(), cumulativeMap.get(p.getKey()) + p.getValue());
-                } else {
-                    cumulativeMap.put(p.getKey(), p.getValue());
-                }
-            }
-        }
+       // for(Map<String, Integer> productMap: products)
+       //     for (Map.Entry<String, Integer> p : productMap.entrySet()) {
+        //        if (cumulativeMap.containsKey(p.getKey())) {
+         //           cumulativeMap.put(p.getKey(), cumulativeMap.get(p.getKey()) + p.getValue());
+          //      } else {
+          //          cumulativeMap.put(p.getKey(), p.getValue());
+         //       }
+          //  }
 
         for (String key : products.keySet()) {
             System.out.println(key);
@@ -53,27 +89,16 @@ public class Main {
         }
 
 
+
         System.out.println(products);
-
-    //    for(Map<String, Integer> productMap: products){
-      //      for(Map.Entry<String, Integer> p: productMap.entrySet()){
-        //        if(cumulativeMap.containsKey(p.getKey())){
-          //          cumulativeMap.put(p.getKey(), cumulativeMap.get(p.getKey())+ p.getValue());
-        //        }
-         //       else{
-         //           cumulativeMap.put(p.getKey(),  p.getValue());
-        //        }
-          //  }
-      //  }
-
         System.out.println(cumulativeMap.toString());
 
 
 
         Collector<String,StringBuilder, String> stringBuilderCollector =  Collector.of(
                 StringBuilder::new, // метод инициализации аккумулятора
-                (b ,s) -> b.append(s).append(" , "), // метод обработки каждого элемента
-                (b1, b2) -> b1.append(b2).append(" , "), // метод соединения двух аккумуляторов при параллельном выполнении
+                (r, s) -> r.append(s).append(" , "), // метод обработки каждого элемента
+                (b3, b4) -> b3.append(b4).append(" , "), // метод соединения двух аккумуляторов при параллельном выполнении
                 StringBuilder::toString // метод выполняющися в самом конце
         );
 
@@ -84,18 +109,20 @@ public class Main {
 
 
 
-        Map<Integer, String> map =new HashMap<>();
-        map.put(8904512,"Попов А.А." );
-        map.put(852,"Сидоров А.А.");
-        map.put(2548,"Петров А.А.");
-        map.put(6585,"Никитин А.А." );
-        map.put(74895,"Соколов А.А." );
-        map.put(02154,"Мишарин А.А." );
-        map.put(624,"Анисимов А.А.");
-        map.put(8922,"Проныров А.А.");
-        map.put(0245,"Сидоров Н.Ю." );
-        map.put(3215,"Решетов А.А." );
-        System.out.println(map);
+        Map<String, Integer> sortedMap = new TreeMap<String, Integer>(String.CASE_INSENSITIVE_ORDER);
+        
+        sortedMap.put("Попов А.А.", 8904512);
+        sortedMap.put("Сидоров А.А.", 852);
+        sortedMap.put("Петров А.А.", 2548);
+        sortedMap.put("Никитин А.А.", 6585);
+        sortedMap.put("Соколов А.А.", 74895);
+        sortedMap.put("Мишарин А.А.", 02154);
+        sortedMap.put("Анисимов А.А.", 624);
+        sortedMap.put("Проныров А.А.", 8922);
+        sortedMap.put("Сидоров Н.Ю.", 30245);
+        sortedMap.put("Решетов А.А.", 3215);
+        sortedMap.putAll(sortedMap);
+        System.out.println(sortedMap);
     }
 
 
